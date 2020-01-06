@@ -7,6 +7,7 @@ RUN apt-get install -y nginx php7.3-fpm
 RUN apt-get install -y wget
 RUN apt-get install -y mariadb-server
 RUN apt-get install -y php7.3-mysql
+RUN apt-get install -y openssl
 #configure mysql 
 #create creation script and pipe it into mysql
 COPY ./srcs/sql.conf /tmp
