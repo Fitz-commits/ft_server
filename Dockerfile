@@ -23,9 +23,9 @@ RUN wget https://files.phpmyadmin.net/phpMyAdmin/4.9.2/phpMyAdmin-4.9.2-english.
 RUN tar -C /var/www -xvf phpMyAdmin-4.9.2-english.tar.gz
 RUN mv /var/www/phpMyAdmin-4.9.2-english /var/www/phpMyAdmin
 #copy wordpress
-COPY ./srcs/wordpress /var/www
+COPY ./srcs/wordpress /var/www/wordpress
 #adding ssl layer
 COPY ./srcs/ssl.conf /tmp
-RUN openssl req -newkey rsa:2048 -nodes --config /tmp/ssl.conf -keyout /etc/nginx/nginx.key -out /etc/nginx/nginx.cert
-CMD service mysql start && service php7.3-fpm start && nginx -g "deamon off" ;
+RUN openssl req -x509 -newkey rsa:2048 -nodes -config /tmp/ssl.conf -keyout /etc/nginx/nginx.key -out /etc/nginx/nginx.cert
+CMD service mysql start && service php7.3-fpm start && nginx "-g daemon off;" 
 #CMD ["nginx", "-g","deamon off"]
